@@ -2,6 +2,7 @@ package com.stuin.cleanvisuals;
 
 import android.os.AsyncTask;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -13,13 +14,16 @@ import java.util.List;
  * Created by Stuart on 2/11/2017.
  */
 public class Request {
-    public static String address;
+    public static EndPoint endPoint;
     public static boolean error;
 
     private static boolean running;
 
     public void start(String query) {
-        if(!running) new serverRequest().execute(query, "http://" + address);
+        String start = "http://";
+        if(endPoint.secure) start = "https://";
+
+        if(!running) new serverRequest().execute(query, start + endPoint.address);
         running = true;
     }
 
@@ -34,12 +38,20 @@ public class Request {
             List<String> out = new ArrayList<>();
             try {
                 URL url = new URL(params[1] + '/' + params[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.setReadTimeout(500);
                 connection.setConnectTimeout(500);
 
+                if(endPoint.secure) {
+                    for(int i = 0; i < endPoint.propVals.size(); i++) {
+                        connection.addRequestProperty(endPoint.propIds.get(i), endPoint.propVals.get(i));
+                    }
+                }
+
                 try {
-                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    if(endPoint.secure) reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    else reader = new BufferedReader(new InputStreamReader(((HttpURLConnection) connection).getInputStream()));
+
                     String s = reader.readLine();
                     while(s != null) {
                         out.add(s);
