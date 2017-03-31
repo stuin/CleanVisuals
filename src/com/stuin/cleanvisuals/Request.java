@@ -19,7 +19,7 @@ public class Request {
     private static boolean running;
 
     public void start(String query) {
-        if(!running) new serverRequest().execute(query, "http://" + address + ":8080");
+        if(!running) new serverRequest().execute(query, "http://" + address);
         running = true;
     }
 
