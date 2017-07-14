@@ -38,19 +38,12 @@ public class Request {
             List<String> out = new ArrayList<>();
             try {
                 URL url = new URL(params[1] + '/' + params[0]);
-                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setReadTimeout(500);
                 connection.setConnectTimeout(500);
 
-                if(endPoint.secure) {
-                    for(int i = 0; i < endPoint.propVals.size(); i++) {
-                        connection.addRequestProperty(endPoint.propIds.get(i), endPoint.propVals.get(i));
-                    }
-                }
-
                 try {
-                    if(endPoint.secure) reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    else reader = new BufferedReader(new InputStreamReader(((HttpURLConnection) connection).getInputStream()));
+                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
                     String s = reader.readLine();
                     while(s != null) {

@@ -7,10 +7,10 @@ import java.util.List;
  * Created by Stuart on 3/31/2017.
  */
 public class EndPoint {
-    public String address;
-    public List<String> propIds;
-    public List<String> propVals;
-    public boolean secure = false;
+    String address;
+    List<String> propIds;
+    List<String> propVals;
+    boolean secure = false;
 
     public EndPoint(String address) {
         this.address = address;
