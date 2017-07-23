@@ -18,7 +18,11 @@ public class Range {
         this.max = max;
     }
 
-    public int GetInt(Random rand) {
-        return rand.nextInt(max) + min;
+    public int getInt(Random rand) {
+        return rand.nextInt(max - min) + min;
+    }
+
+    public boolean contains(int i) {
+        return i > min && i < max;
     }
 }

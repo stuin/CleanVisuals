@@ -12,7 +12,7 @@ public class Settings
 	private static String[] KEYS;
 	private static SharedPreferences preferences;
 	
-	public static void Load(SharedPreferences preferences, String[] KEYS) {
+	public static void load(SharedPreferences preferences, String[] KEYS) {
 		Settings.preferences = preferences;
 		Settings.KEYS = KEYS;
 		
@@ -21,7 +21,7 @@ public class Settings
 		}
 	}
 	
-	public static void Set(String key, boolean value) {
+	public static void set(String key, boolean value) {
 		if(values.containsKey(key)) {
 			preferences.edit().putBoolean(key, value).apply();
 			values.remove(key);
@@ -29,18 +29,18 @@ public class Settings
 		}
 	}
 	
-	public static boolean Get(String key) {
+	public static boolean get(String key) {
 		return values.get(key);
 	}
 	
-	public static boolean LinkId(int id, String key) {
+	public static boolean linkId(int id, String key) {
 		ids.put(id, key);
-		return Get(key);
+		return get(key);
 	}
 	
-	public static void SetId(int id, boolean value) {
+	public static void setId(int id, boolean value) {
 		if(ids.containsKey(id)) {
-			Set(ids.get(id), value);
+			set(ids.get(id), value);
 		}
 	}
 }

@@ -1,6 +1,7 @@
-package com.stuin.cleanvisuals;
+package com.stuin.cleanvisuals.Slide;
 
 import android.view.View;
+import com.stuin.cleanvisuals.Slide.Slider;
 
 /**
  * Created by Stuart on 3/17/2017.
@@ -40,7 +41,11 @@ public class SliderSync {
         return (primary.exit() || secondary.exit());
     }
 
-    public boolean show() {
-        return (primary.enter() || secondary.enter());
+    public boolean primaryShown() {
+        return primary.shown();
+    }
+
+    public boolean secondaryShown() {
+        return secondary.shown();
     }
 }

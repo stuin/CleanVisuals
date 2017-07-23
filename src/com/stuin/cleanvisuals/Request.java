@@ -14,16 +14,15 @@ import java.util.List;
  * Created by Stuart on 2/11/2017.
  */
 public class Request {
-    public static EndPoint endPoint;
+    public static String address;
     public static boolean error;
 
     private static boolean running;
 
     public void start(String query) {
         String start = "http://";
-        if(endPoint.secure) start = "https://";
 
-        if(!running) new serverRequest().execute(query, start + endPoint.address);
+        if(!running) new serverRequest().execute(query, start + address);
         running = true;
     }
 
