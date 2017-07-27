@@ -9,15 +9,17 @@ public class Settings
 {
 	private static Map<String, Boolean> values = new HashMap<>();
 	private static Map<Integer, String> ids = new HashMap<>();
-	private static String[] KEYS;
 	private static SharedPreferences preferences;
-	
-	public static void load(SharedPreferences preferences, String[] KEYS) {
+
+	public static void load(SharedPreferences preferences, String[] keys) {
+		load(preferences, keys, false);
+	}
+
+	public static void load(SharedPreferences preferences, String[] keys, boolean base) {
 		Settings.preferences = preferences;
-		Settings.KEYS = KEYS;
 		
-		for(String key : KEYS) {
-			values.put(key, preferences.getBoolean(key, false));
+		for(String key : keys) {
+			values.put(key, preferences.getBoolean(key, base));
 		}
 	}
 	
