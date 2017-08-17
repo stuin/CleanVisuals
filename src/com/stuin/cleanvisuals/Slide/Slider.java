@@ -19,24 +19,28 @@ public class Slider {
         this.view = view;
     }
 
-    public void setup(boolean side, int start, int time) {
+    public void setup(boolean side, int start, int duration) {
         unSet = false;
 
+        //Set enter animation
         if(side) enterAnimation = new TranslateAnimation(start, 0, 0, 0);
         else enterAnimation = new TranslateAnimation(0, 0, start, 0);
-        enterAnimation.setDuration(time);
+        enterAnimation.setDuration(duration);
 
+        //Set exit animation
         if(side) exitAnimation = new TranslateAnimation(0, start, 0, 0);
         else exitAnimation = new TranslateAnimation(0, 0, 0, start);
-        exitAnimation.setDuration(time);
+        exitAnimation.setDuration(duration);
     }
 
     public boolean enter() {
         if(!shown()) {
+            //Bring view on screen
             moving = true;
             view.setVisibility(View.VISIBLE);
             view.startAnimation(enterAnimation);
 
+            //Wait till finished
             view.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -51,9 +55,11 @@ public class Slider {
 
     public boolean exit() {
         if(shown()) {
+            //Send view off screen
             moving = true;
             view.startAnimation(exitAnimation);
 
+            //Wait till finished
             view.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -68,11 +74,7 @@ public class Slider {
     }
 
     public boolean shown() {
+        //Detect if shown
         return view.getVisibility() == View.VISIBLE;
-    }
-
-    public interface Endings {
-        void enter();
-        void exit();
     }
 }
