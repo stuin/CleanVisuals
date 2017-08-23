@@ -17,6 +17,10 @@ public class Object extends ImageView {
     public Object(Plane plane) {
         super(plane.getContext());
         this.plane = plane;
+
+        //Set up basic appearance
+        setMinimumHeight(plane.objectLength);
+        setMinimumWidth(plane.objectLength);
         setImageDrawable(plane.drawable);
     }
 
