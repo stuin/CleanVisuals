@@ -54,9 +54,11 @@ public class Object extends ImageView {
     }
 
     public void hide() {
-        shown = false;
-        setVisibility(View.GONE);
-        plane.waiting.push(this);
+        if(shown) {
+            shown = false;
+            setVisibility(View.GONE);
+            plane.waiting.push(this);
+        }
     }
 
     private void shift() {
