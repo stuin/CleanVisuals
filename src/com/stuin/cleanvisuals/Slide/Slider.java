@@ -34,7 +34,7 @@ public class Slider {
     }
 
     public boolean enter() {
-        if(!shown()) {
+        if(!shown() && !moving) {
             //Bring view on screen
             moving = true;
             view.setVisibility(View.VISIBLE);
@@ -54,7 +54,7 @@ public class Slider {
     }
 
     public boolean exit() {
-        if(shown()) {
+        if(shown() && !moving) {
             //Send view off screen
             moving = true;
             view.startAnimation(exitAnimation);
@@ -76,5 +76,9 @@ public class Slider {
     public boolean shown() {
         //Detect if shown
         return view.getVisibility() == View.VISIBLE;
+    }
+    
+    public boolean moving() {
+        return moving;
     }
 }
