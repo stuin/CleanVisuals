@@ -24,7 +24,7 @@ public class Plane extends RelativeLayout {
     Random rand;
 
     public boolean on = true;
-    public boolean vertical;
+    public boolean side;
     public int length;
     public int width;
     public int start;
