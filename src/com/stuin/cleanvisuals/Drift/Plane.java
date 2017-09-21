@@ -48,12 +48,12 @@ public class Plane extends RelativeLayout {
         unset = false;
 
         //Set dimensions
-        if(vertical) {
-            length = getHeight();
-            width = getWidth();
-        } else {
+        if(side) {
             length = getWidth();
             width = getHeight();
+        } else {
+            length = getHeight();
+            width = getWidth();
         }
 
         if(on) postDelayed(updateRunnable, updateTime);
