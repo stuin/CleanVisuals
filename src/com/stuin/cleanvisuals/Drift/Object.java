@@ -31,8 +31,8 @@ public class Object extends ImageView {
         distance = plane.start;
 
         //Set new position
-        if(plane.vertical) setTranslationX(offset);
-        else setTranslationY(offset);
+        if(plane.side) setTranslationY(offset);
+        else setTranslationX(offset);
         shift();
 
         //start movement
@@ -63,7 +63,7 @@ public class Object extends ImageView {
 
     private void shift() {
         //Position object
-        if(plane.vertical) setTranslationY(distance);
-        else setTranslationX(distance);
+        if(plane.side) setTranslationX(distance);
+        else setTranslationY(distance);
     }
 }
