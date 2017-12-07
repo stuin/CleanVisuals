@@ -6,7 +6,7 @@ import android.widget.ImageView;
 /**
  * Created by Stuart on 7/13/2017.
  */
-public class Object extends ImageView {
+public class Drifter extends ImageView {
     public Plane plane;
 
     public int offset;
@@ -14,7 +14,7 @@ public class Object extends ImageView {
     public int speed;
     public boolean shown;
 
-    public Object(Plane plane) {
+    public Drifter(Plane plane) {
         super(plane.getContext());
         this.plane = plane;
 

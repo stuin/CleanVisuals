@@ -4,10 +4,10 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
+
 import com.stuin.cleanvisuals.Range;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
@@ -15,14 +15,15 @@ import java.util.Stack;
  * Created by Stuart on 7/13/2017.
  */
 public class Plane extends RelativeLayout {
-    private List<Object> objects = new ArrayList<>();
+	//Technical variables
+    private ArrayList<Drifter> drifters = new ArrayList<>();
     private boolean unset = true;
-    private int updateTime = 1;
     private int time = 0;
 
-    Stack<Object> waiting = new Stack<>();
+    Stack<Drifter> waiting = new Stack<>();
     Random rand;
 
+	//Create configuration variables
     public boolean on = true;
     public boolean side;
     public int length;
@@ -43,7 +44,7 @@ public class Plane extends RelativeLayout {
     }
 
     //Actual setup
-    public void setup() {
+    public void setup(Engine engine) {
         rand = new Random();
         unset = false;
 
@@ -55,41 +56,44 @@ public class Plane extends RelativeLayout {
             length = getHeight();
             width = getWidth();
         }
-
-        if(on) postDelayed(updateRunnable, updateTime);
+		
+		//Connect to engine
+		engine.add(updateRunnable);
     }
 
+	//Send forth a drifter object
+    public Drifter add() {
+        Drifter drifter;
+        if(waiting.isEmpty()) {
+			//Create a new drifter
+            drifter = new Drifter(this);
+            addView(drifter);
+            drifters.add(drifter);
+        } else {
+			//Recycle an old drifter
+            drifter = waiting.pop();
+        }
+		
+		//Start chosen drifter
+        drifter.start();
+        return drifter;
+    }
+
+	//On each update
     private Runnable updateRunnable = new Runnable() {
         @Override
         public void run() {
-            update();
+            if(on && !unset) {
+				//Update all drifters
+				for(Drifter drifter : drifters) drifter.update();
+				
+				//Check for adding another
+				if(time % addTime == 0) add();
+				time++;
+			} else if(waiting.size() < drifters.size()) {
+				//Hide all drifters
+				for(Drifter drifter : drifters) drifter.hide();
+			}
         }
     };
-
-    public void update() {
-        if(unset) setup();
-        if(on) {
-            //update all objects
-            for(Object object : objects) object.update();
-            if(time % addTime == 0) add();
-            time++;
-        } else if(waiting.size() < objects.size()) {
-            //hide all objects
-            for(Object object : objects) object.hide();
-        }
-        postDelayed(updateRunnable, updateTime);
-    }
-
-    public Object add() {
-        Object object;
-        if(waiting.isEmpty()) {
-            object = new Object(this);
-            addView(object);
-            objects.add(object);
-        } else {
-            object = waiting.pop();
-        }
-        object.start();
-        return object;
-    }
 }

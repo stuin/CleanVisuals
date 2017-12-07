@@ -41,23 +41,25 @@ public class SliderSync {
 
     public boolean showPrimary() {
         //Show only primary view
-        if(!moving())
-            return secondary.exit() || primary.enter();
+        if(!moving()) {
+            secondary.exit();
+            return primary.enter();
+        }
         return false;
     }
 
     public boolean showSecondary() {
         //Show only secondary view
-        if(!moving())
-            return primary.exit() || secondary.enter();
+        if(!moving()) {
+            primary.exit();
+            return secondary.enter();
+        }
         return false;
     }
 
     public boolean hide() {
         //Hide both views
-        if(!moving())
-            return primary.exit() || secondary.exit();
-        return false;
+        return !moving() && (primary.exit() || secondary.exit());
     }
 
     public boolean primaryShown() {
@@ -71,7 +73,7 @@ public class SliderSync {
     }
     
     public boolean moving() {
-        //Detect if eighther is moving
+        //Detect if either is moving
         return primary.moving() || secondary.moving();
     }
 }
