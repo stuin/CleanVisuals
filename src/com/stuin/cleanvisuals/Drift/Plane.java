@@ -61,6 +61,10 @@ public class Plane extends RelativeLayout {
 		engine.add(updateRunnable);
     }
 
+    public void update() {
+
+    }
+
 	//Send forth a drifter object
     public Drifter add() {
         Drifter drifter;
@@ -83,16 +87,20 @@ public class Plane extends RelativeLayout {
     private Runnable updateRunnable = new Runnable() {
         @Override
         public void run() {
+            update();
             if(on && !unset) {
 				//Update all drifters
-				for(Drifter drifter : drifters) drifter.update();
+				for(Drifter drifter : drifters)
+				    drifter.update();
 				
 				//Check for adding another
-				if(time % addTime == 0) add();
+				if(time % addTime == 0)
+				    add();
 				time++;
 			} else if(waiting.size() < drifters.size()) {
 				//Hide all drifters
-				for(Drifter drifter : drifters) drifter.hide();
+				for(Drifter drifter : drifters)
+				    drifter.hide();
 			}
         }
     };

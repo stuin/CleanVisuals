@@ -36,7 +36,7 @@ public class Request {
             BufferedReader reader;
             List<String> out = new ArrayList<>();
             try {
-                URL url = new URL(params[1] + '/' + params[0]);
+                URL url = new URL(params[1] + params[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setReadTimeout(500);
                 connection.setConnectTimeout(500);

@@ -2,13 +2,12 @@ package com.stuin.cleanvisuals;
 
 import java.util.*;
 import android.content.*;
-import android.preference.*;
 import android.util.SparseArray;
 
 public class Settings
 {
 	private static Map<String, Boolean> values = new HashMap<>();
-	private static Map<Integer, String> ids = new HashMap<>();
+	private static SparseArray<String> ids = new SparseArray<>();
 	private static SharedPreferences preferences;
 
 	public static void load(SharedPreferences preferences, String[] keys) {
@@ -32,17 +31,18 @@ public class Settings
 	}
 	
 	public static boolean get(String key) {
-		return values.get(key);
+	    if(values.containsKey(key))
+		    return values.get(key);
+	    return false;
 	}
 	
 	public static boolean linkId(int id, String key) {
-		ids.put(id, key);
+		if(values.containsKey(key))
+			ids.put(id, key);
 		return get(key);
 	}
 	
 	public static void setId(int id, boolean value) {
-		if(ids.containsKey(id)) {
-			set(ids.get(id), value);
-		}
+		set(ids.get(id), value);
 	}
 }
