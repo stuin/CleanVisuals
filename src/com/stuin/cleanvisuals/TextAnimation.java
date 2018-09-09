@@ -33,7 +33,7 @@ public class TextAnimation {
         textView.postDelayed(shift, speed);
     }
 
-    //Animation to fit text behind grid
+    //Animation to smoothly shrink or add to text
     private Runnable shift = new Runnable() {
         public void run() {
             if(!textView.getText().equals(target) && !interrupt) {
@@ -41,11 +41,12 @@ public class TextAnimation {
                 if(text.length() > target.length()) {
                     //Shrink text by one letter
                     text = text.substring(1, text.length());
-                } else if(text.length() <= target.length()) {
+                } else {
                     //Set next letter
                     if(digit >= text.length()) {
                         text += target.toCharArray()[digit];
                     } else {
+                        //Replace existing
                         char[] chars = text.toCharArray();
                         chars[digit] = target.toCharArray()[digit];
                         text = String.copyValueOf(chars);
