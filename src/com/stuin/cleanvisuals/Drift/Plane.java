@@ -22,7 +22,6 @@ public class Plane extends RelativeLayout {
 
     Stack<Drifter> waiting = new Stack<>();
     Random rand;
-    int updateTime;
 
 	//Create configuration variables
     public boolean on = true;
@@ -45,10 +44,9 @@ public class Plane extends RelativeLayout {
     }
 
     //Actual setup
-    public void setup(Engine engine) {
+    public void setup() {
         rand = new Random();
         unset = false;
-        updateTime = engine.getDelay();
 
         //Set dimensions
         if(side) {
@@ -58,9 +56,12 @@ public class Plane extends RelativeLayout {
             length = getHeight();
             width = getWidth();
         }
-		
-		//Connect to engine
-		engine.add(updateRunnable);
+    }
+
+    public void setup(Engine engine) {
+        //Connect to engine
+        engine.add(updateRunnable);
+        setup();
     }
 
     public void update() {
@@ -96,9 +97,9 @@ public class Plane extends RelativeLayout {
 				    drifter.update();
 				
 				//Check for adding another
-				if(time % addTime < updateTime)
+				if(time % addTime == 0)
 				    add();
-				time += updateTime;
+				time++;
 			} else if(waiting.size() < drifters.size()) {
 				//Hide all drifters
 				for(Drifter drifter : drifters)

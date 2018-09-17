@@ -12,6 +12,10 @@ public class Engine {
 	private View view;
 	private boolean on = false;
 	private int delay;
+
+	public Engine(int delay) {
+		this.delay = delay;
+	}
 	
 	//Add new object to engine
 	public void add(Runnable run) {
@@ -19,10 +23,9 @@ public class Engine {
 	}
 	
 	//Start running engine
-	public void start(View view, int delay) {
+	public void start(View view) {
 		on = true;
 		this.view = view;
-		this.delay = delay;
 
         view.postDelayed(updateRunnable, delay);
 	}

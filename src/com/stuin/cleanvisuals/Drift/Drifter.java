@@ -27,7 +27,7 @@ public class Drifter extends ImageView {
     public void start() {
         //Set new variables
         offset = plane.rand.nextInt(plane.width);
-        speed = plane.speed.getInt(plane.rand) * plane.updateTime;
+        speed = plane.speed.getInt(plane.rand);
         distance = plane.start;
 
         //Set new position
