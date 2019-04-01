@@ -1,4 +1,4 @@
-package com.stuin.cleanvisuals.Slide;
+package com.stuintech.cleanvisuals.Slide;
 
 import android.view.View;
 import android.view.animation.TranslateAnimation;

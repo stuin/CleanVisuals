@@ -1,4 +1,4 @@
-package com.stuin.cleanvisuals;
+package com.stuintech.cleanvisuals;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.stuin.cleanvisuals.Drift;
+package com.stuintech.cleanvisuals.Drift;
 
 import android.view.View;
 import android.widget.ImageView;

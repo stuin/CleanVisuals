@@ -1,11 +1,11 @@
-package com.stuin.cleanvisuals.Drift;
+package com.stuintech.cleanvisuals.Drift;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import com.stuin.cleanvisuals.Range;
+import com.stuintech.cleanvisuals.Range;
 
 import java.util.ArrayList;
 import java.util.Random;

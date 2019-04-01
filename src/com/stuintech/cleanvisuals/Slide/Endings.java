@@ -1,4 +1,4 @@
-package com.stuin.cleanvisuals.Slide;
+package com.stuintech.cleanvisuals.Slide;
 
 /**
  * Created by Stuart on 8/16/2017.

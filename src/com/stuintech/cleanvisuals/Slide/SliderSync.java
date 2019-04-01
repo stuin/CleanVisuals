@@ -1,7 +1,6 @@
-package com.stuin.cleanvisuals.Slide;
+package com.stuintech.cleanvisuals.Slide;
 
 import android.view.View;
-import com.stuin.cleanvisuals.Slide.Slider;
 
 /**
  * Created by Stuart on 3/17/2017.
