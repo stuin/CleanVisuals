@@ -51,21 +51,25 @@ public class Settings
 		set(ids.get(id), value);
 	}
 
+	//Get list of ids
+	public static String[] getKeys() {
+		return values.keySet().toArray(new String[0]);
+	}
+
 	//Convert list of variables to int
 	public static int exporter(String[] keys) {
         int data = 0;
-        for(String key : keys) {
+        for(String key : keys)
             data = (data << 1) | (get(key) ? 1 : 0);
-        }
 
         return data;
     }
 
     //Convert int to list of variables
     public static void importer(String[] keys, int data) {
-	    int i = 0;
+	    int i = 1;
 	    for(String key : keys) {
-            set(key, (data & (1 << i)) != 0);
+            set(key, (data & (1 << (keys.length - i))) != 0);
             i++;
         }
     }
